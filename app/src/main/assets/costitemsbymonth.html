@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cost Items</title>
+</head>
+
+<body>
+    <!--this page display the table which contain specific items by month-->
+    <div data-role="page" id="cost items by date">
+        <div data-role="header">
+            <h1>Cost Items List</h1>
+            <a href="selectperiod.html" class="ui-btn" data-rel="back">back</a>
+        </div>
+        <div data-role="content">
+            <ul data-role="table" id="table" class="ui-responsive table-stroke">
+            </ul>
+        </div>
+        <div data-role="footer">
+            <h4>Cost Manager App</h4>
+        </div>
+        <script type="text/javascript">
+            /**
+             * This method will create the table and fill it
+             *
+             */
+            (function () {
+                //array for the names of the columns
+                var headArr = ["Name", "Price", "Description", "Date", "Category"];
+
+                //get the table from the body
+                var table = document.getElementById('table');
+
+                //create the head of the table
+                var thead = document.createElement("thead");
+
+                //create the row of the table head
+                var tr = document.createElement("tr");
+
+                //fill the head of the table
+                headArr.forEach(
+                    function (ob) {
+                        var th = document.createElement("th");
+                        var text = document.createTextNode(ob);
+                        th.appendChild(text);
+                        tr.appendChild(th);
+                        thead.appendChild(tr);
+                    }
+                );
+                table.appendChild(thead);
+
+
+
+                //get the month entered by the user
+                var month = document.getElementById('date').value;
+
+                //get the cost items for the month entered by the user
+                var vec = window.costlib.getCostsPerMonth(month);
+
+                //create the body of the table
+                var tbody = document.createElement("tbody");
+
+                //fill the table body with the products
+                vec.forEach(
+                    function (ob) {
+
+                        //fill the cost item name
+                        var td = document.createElement("td");
+                        var text = document.createTextNode(ob.cost_name);
+                        var tr = document.createElement("tr");
+                        td.appendChild(text);
+                        tr.appendChild(td);
+                        tbody.appendChild(tr);
+
+                        //fill the cost item price
+                        var td = document.createElement("td");
+                        var text = document.createTextNode(ob.price);
+                        td.appendChild(text);
+                        tr.appendChild(td);
+                        tbody.appendChild(tr);
+
+                        //fill the cost item description
+                        var td = document.createElement("td");
+                        var text = document.createTextNode(ob.description);
+                        td.appendChild(text);
+                        tr.appendChild(td);
+                        tbody.appendChild(tr);
+
+                        //fill the cost item date
+                        var td = document.createElement("td");
+                        var text = document.createTextNode(ob.date);
+                        td.appendChild(text);
+                        tr.appendChild(td);
+                        tbody.appendChild(tr);
+
+                        //fill the cost item category
+                        var td = document.createElement("td");
+                        var text = document.createTextNode(ob.category);
+                        td.appendChild(text);
+                        tr.appendChild(td);
+                        tbody.appendChild(tr);
+
+                        //gain a space between the current item and the next item
+                        var space = document.createElement("td");
+                        var space2 = document.createElement("td");
+                        var space3 = document.createElement("td");
+                        tr.appendChild(space);
+                        tr.appendChild(space2);
+                        tr.appendChild(space3);
+                    }
+                );
+                table.appendChild(tbody);
+            })();
+
+        </script>
+    </div>
+
+</body>
+
+</html>

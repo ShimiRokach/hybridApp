@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="1.4.3.min.css" />
+    <script src="1.11.1.min.js"></script>
+    <script src="1.4.3.min.js"></script>
+    <script type="text/javascript" src="piechart.js"></script>
+    <script src="costlib.js"></script>
+    <title>Cost Items</title>
+</head>
+
+<body>
+    <!--here we fill the fields of the cost item we add-->
+    <div data-role="page" id="home" style="background-color: #bee5ce;">
+        <div data-role="header" style="background-color: rgb(195, 236, 236);">
+            <h1>Add Cost Item</h1>
+        </div>
+        <div data-role="content">
+            <form>
+                <label for="cost_name">Name:</label>
+                <input type="text" name="cost_name" id="cost_name"/>
+
+                <label for="price">Price:</label>
+                <input type="number" name="price" id="price">
+
+                <label for="description">Description:</label>
+                <input type="text" name="description" id="description"/>
+
+                <label for="date-input">Date:</label>
+                <input type="date" name="date" id="date-input">
+
+                <label for="category-input">Select Category</label>
+                <select name="category" id="category-input">
+                    <option value="food">Food</option>
+                    <option value="electric">Electric</option>
+                    <option value="entertainment">Entertainment</option>
+                </select>
+
+                <br>
+
+                <!--submit and triger the dailog box-->
+                <a href="#dialog" class="ui-btn ui-corner-all" style="background: rgb(122, 162, 221);"
+                    id="submit">Submit</a>
+
+                <br>
+
+            </form>
+
+            <!--this 2 buttons allow the user to display the items-->
+            <a href="select.html" style="background-color: rgb(237, 238, 175);" data-role="button">All Items</a>
+            <a href="selectperiod.html" style="background-color: rgb(237, 238, 175);" data-role="button">Items By
+                Month</a>
+
+        </div>
+        <script>
+            /**
+             * This method invoke when the add button clicked
+             *
+             */
+            window.costlib.handleButtonClick = function () {
+                //this object represent the new cost item
+                let item = {
+                    cost_name: document.getElementById("cost_name").value,
+                    price: document.getElementById("price").value,
+                    description: document.getElementById("description").value,
+                    date: document.getElementById("date-input").value,
+                    category: document.getElementById("category-input").value
+                }
+                window.costlib.addCostItem(item);
+                document.forms[0].reset();
+            }
+            //add event listener to the add button
+            document.getElementById("submit").addEventListener("click", window.costlib.handleButtonClick);
+
+        </script>
+
+        <div data-role="footer">
+            <h4>Cost Items Manager</h4>
+        </div>
+
+    </div>
+
+    <!-- Dialog only page -->
+    <div data-role="dialog" id="dialog">
+        <div data-role="header">
+            <h1>Item Added Successfully!</h1>
+        </div>
+        <div data-role="content">
+            <p>Please press x to return the main screen
+            </p>
+        </div>
+    </div>
+
+</body>
+
+</html>
